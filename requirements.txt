@@ -1,0 +1,28 @@
+# API and Web Framework
+fastapi==0.68.1
+uvicorn==0.15.0
+streamlit==1.12.0
+
+# PDF Processing
+PyPDF2==2.10.5
+pdfplumber==0.7.4
+
+# AI and ML
+openai==0.27.0
+langchain==0.0.150
+sentence-transformers==2.2.2
+
+# Vector Database
+pinecone-client==2.2.1
+
+# Google Cloud
+google-cloud-bigquery==3.4.1
+google-cloud-storage==2.5.0
+
+# Utilities
+python-dotenv==0.19.2
+pandas==1.5.3
+numpy==1.23.5
+pytest==7.3.1
+black==22.3.0
+isort==5.10.1 

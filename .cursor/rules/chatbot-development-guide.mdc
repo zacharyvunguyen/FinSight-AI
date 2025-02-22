@@ -1,0 +1,117 @@
+---
+description: 
+globs: 
+---
+### **AI-Powered Financial Report Chatbot Development Guide**  
+
+You are an expert in **financial AI development**, specializing in **document intelligence, Retrieval-Augmented Generation (RAG), and financial data analysis** using **GPT-4, LlamaIndex, Pinecone, LlamaParse, BigQuery, LangChain, FastAPI, Streamlit, and GCP Cloud Storage**.
+
+---
+
+### **Key Principles**  
+- Develop a chatbot that **extracts, compares, and analyzes financial reports** in PDF format.  
+- Ensure **clarity, efficiency, and scalability** in chatbot workflows.  
+- Maintain a **modular structure** for data ingestion, processing, querying, and response generation.  
+- Securely store **API keys and configurations** using `.env` files.  
+- Follow **best practices for structured data storage (BigQuery) and AI-powered search (Pinecone)**.  
+- Write **clear Git commit messages** that reflect changes logically.  
+
+---
+
+### **Project Structure & Setup**  
+- Organize the project into **backend (FastAPI), frontend (Streamlit), and processing scripts**.  
+- Use **Anaconda for environment management** and track dependencies in `requirements.txt`.  
+- Initialize a **Git repository** and document the project in `README.md`.  
+
+---
+
+### **Data Processing & Storage**  
+- Extract **financial tables, text, and insights** from PDFs using **LlamaParse**.  
+- Store structured **numerical data in BigQuery** for SQL-based analysis.  
+- Convert **unstructured text into vector embeddings** and store in **Pinecone** for AI-powered search.  
+- Implement **change detection** to flag **balance sheet fluctuations (±$20M) and P&L variations (±$5M)**.  
+
+---
+
+### **Backend API Development (FastAPI)**  
+- Develop an API to **handle PDF uploads** and store reports in **GCP Cloud Storage**.  
+- Implement endpoints for **financial data extraction, comparison, and AI-powered insights**.  
+- Enable **real-time financial querying** using **GPT-4, LlamaIndex, and LangChain**.  
+- Ensure APIs are **efficient, well-documented, and secure**.  
+
+---
+
+### **AI-Powered Query Handling (GPT-4 + Pinecone + LangChain)**  
+- Implement **semantic search** using **Pinecone** to retrieve relevant financial sections.  
+- Process **financial questions** with **GPT-4 and LlamaIndex** for **context-aware insights**.  
+- Optimize responses by **retrieving structured data from BigQuery** when applicable.  
+- Support **financial trend analysis and AI-driven decision-making**.  
+
+---
+
+### **Frontend Development (Streamlit UI)**  
+- Develop a **dashboard** for users to:  
+  - Upload **financial reports** for analysis.  
+  - View **extracted data and detected financial changes**.  
+  - Ask **AI-powered financial questions**.  
+  - Retrieve **historical reports** using **semantic search**.  
+- Provide **CSV/PDF export options** for structured reports.  
+
+---
+
+### **Error Handling and Debugging**  
+- Implement **try-except blocks** for API and processing failures.  
+- Enable **logging and monitoring** for debugging failed extractions or API errors.  
+- Use **BigQuery logging** for financial data auditability.  
+
+---
+
+### **Performance Optimization**  
+- Optimize **BigQuery queries** for financial comparisons.  
+- Implement **batch processing** for handling multiple financial reports.  
+- Use **Pinecone indexing efficiently** to speed up search retrievals.  
+- Optimize **GPT-4 API calls** for minimal token usage and cost efficiency.  
+
+---
+
+### **Dependencies**  
+- `fastapi` (Backend API)  
+- `uvicorn` (Server)  
+- `streamlit` (Frontend UI)  
+- `pydantic` (Data validation)  
+- `llama-index` (Financial document indexing)  
+- `pinecone-client` (Vector database)  
+- `openai` (GPT-4 API)  
+- `google-cloud-storage` (Financial report storage)  
+- `google-cloud-bigquery` (Financial data analysis)  
+- `pdfplumber` (PDF text extraction)  
+- `langchain` (LLM-based processing)  
+- `llamaparse` (Financial document parsing)  
+- `pandas` (Data processing)  
+- `python-dotenv` (Environment variable management)  
+
+---
+
+### **Key Conventions**  
+1. **Start with a clear problem definition** and identify the financial data workflow.  
+2. Maintain a **modular codebase** with separate files for **data ingestion, processing, API, and UI**.  
+3. Use **BigQuery for structured financial storage** and **Pinecone for AI-powered retrieval**.  
+4. Secure **API keys in `.env` files** and avoid storing sensitive data in code.  
+5. Use **version control (Git)** with meaningful commit messages:  
+   - `"Implement PDF extraction with LlamaParse"`  
+   - `"Optimize AI-powered financial queries"`  
+   - `"Deploy chatbot backend to GCP Cloud Run"`  
+6. Follow **best practices for cloud deployment** (GCP Cloud Run for API, GCP App Engine for frontend).  
+7. Document **financial insights clearly** to ensure usability for financial analysts.  
+
+---
+
+### **Final Deliverables**  
+✅ A fully functional **AI-powered financial chatbot**  
+✅ **FastAPI backend** for processing financial queries  
+✅ **Streamlit frontend** for user interaction  
+✅ **BigQuery integration** for structured financial storage  
+✅ **Pinecone integration** for AI-driven search  
+✅ **Deployment on GCP Cloud Run & App Engine**  
+
+Refer to the official documentation of **FastAPI, Streamlit, Pinecone, LlamaIndex, and BigQuery** for best practices and up-to-date APIs.
