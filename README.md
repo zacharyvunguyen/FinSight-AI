@@ -51,7 +51,7 @@ FinSight-AI/
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/FinSight-AI.git
+   git clone https://github.com/zacharyvunguyen/FinSight-AI.git
    cd FinSight-AI
    ```
 
