@@ -4,17 +4,25 @@ def check_versions():
     
     packages = {
         'fastapi': 'fastapi',
+        'uvicorn': 'uvicorn',
         'streamlit': 'streamlit',
+        'pydantic': 'pydantic',
         'pandas': 'pandas',
         'numpy': 'numpy',
         'PyPDF2': 'PyPDF2',
         'pdfplumber': 'pdfplumber',
         'openai': 'openai',
         'langchain': 'langchain',
-        'sentence_transformers': 'sentence_transformers',
+        'sentence_transformers': 'sentence-transformers',
         'pinecone': 'pinecone',
+        'llama_index': 'llama-index',
+        'llama_parse': 'llama-parse',
         'google.cloud.bigquery': 'google-cloud-bigquery',
-        'google.cloud.storage': 'google-cloud-storage'
+        'google.cloud.storage': 'google-cloud-storage',
+        'requests': 'requests',
+        'black': 'black',
+        'isort': 'isort',
+        'pytest': 'pytest'
     }
     
     print("\nPackage Versions:")

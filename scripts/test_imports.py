@@ -1,12 +1,20 @@
 def test_imports():
     packages = {
         'Basic Data Science': ['pandas', 'numpy'],
-        'Web Framework': ['fastapi', 'uvicorn'],
+        'Web Framework': ['fastapi', 'uvicorn', 'pydantic'],
+        'UI': ['streamlit'],
         'PDF Processing': ['PyPDF2', 'pdfplumber'],
-        'AI/ML': ['openai', 'langchain', 'sentence_transformers', 'pinecone'],
+        'AI/ML': [
+            'openai',
+            'langchain',
+            'sentence_transformers',
+            'pinecone',
+            'llama_index'
+        ],
         'Cloud Services': ['google.cloud.bigquery', 'google.cloud.storage'],
+        'Document Processing': ['llama_parse'],
         'Development Tools': ['pytest', 'black', 'isort'],
-        'UI': ['streamlit']
+        'Utilities': ['requests', 'dotenv']
     }
     
     failed_imports = []
