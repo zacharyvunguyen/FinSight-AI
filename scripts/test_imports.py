@@ -3,7 +3,7 @@ def test_imports():
         'Basic Data Science': ['pandas', 'numpy'],
         'Web Framework': ['fastapi', 'uvicorn'],
         'PDF Processing': ['PyPDF2', 'pdfplumber'],
-        'AI/ML': ['openai', 'langchain', 'sentence_transformers'],
+        'AI/ML': ['openai', 'langchain', 'sentence_transformers', 'pinecone'],
         'Cloud Services': ['google.cloud.bigquery', 'google.cloud.storage'],
         'Development Tools': ['pytest', 'black', 'isort'],
         'UI': ['streamlit']
