@@ -4,6 +4,9 @@
 - PDF Upload API with deduplication
 - Google Cloud Storage integration
 - Secure file access with signed URLs
+- Firestore metadata storage
+- Duplicate file detection
+- SHA-256 hash verification
 
 ## Structure
 ```
@@ -11,11 +14,12 @@ backend/
 ├── app/
 │   ├── api/        # API endpoints
 │   │   └── endpoints/
-│   │       └── pdf.py    # PDF upload endpoint
+│   │       └── pdf.py    # PDF upload endpoint with deduplication
 │   ├── core/       # Core configurations
 │   ├── models/     # Data models
 │   ├── services/   # Business logic
-│   │   └── storage.py    # GCS storage service
+│   │   ├── storage.py    # GCS storage service
+│   │   └── firestore.py  # Firestore metadata service
 │   └── utils/      # Utility functions
 └── tests/          # Backend tests
 ```
@@ -75,9 +79,28 @@ The backend uses pydantic-settings for configuration management. All settings ar
   - SHA-256 hash generation
   - Organized storage structure (by date)
   - Signed URL generation for secure access
+  - Duplicate detection via Firestore
+  - Metadata tracking in Firestore
 
 ## Storage Structure
 Files are stored in GCS with the following path structure:
 ```
 uploads/YYYY/MM/DD/[file-hash]/[filename]
-``` 
+```
+
+## Data Storage
+- **Google Cloud Storage**: PDF file storage
+- **Firestore**: File metadata and hash tracking
+  - Collection: `pdf_files`
+  - Document ID: File hash
+  - Metadata stored:
+    - file_name
+    - file_size
+    - storage_path
+    - content_type
+    - created_at
+
+## Verification Scripts
+- `verify_pdf_service.py`: Test full upload pipeline
+- `list_stored_hashes.py`: View stored file metadata
+- `verify_uploads.py`: Check GCS uploads 

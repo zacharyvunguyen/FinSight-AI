@@ -21,6 +21,7 @@ google-cloud-firestore>=2.13.0
 
 # Utilities
 python-dotenv>=1.0.0
+hashlib>=20081119
 pandas>=2.1.4
 numpy>=1.26.2
 pytest>=7.4.3
