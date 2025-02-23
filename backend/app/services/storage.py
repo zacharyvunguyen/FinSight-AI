@@ -1,12 +1,24 @@
 from google.cloud import storage
+from google.oauth2 import service_account
 import hashlib
 from datetime import datetime, timedelta
 from typing import BinaryIO, Tuple
 import os
+from ..core.config import settings
 
 class StorageService:
     def __init__(self, bucket_name: str):
-        self.storage_client = storage.Client()
+        # Load credentials from the service account file
+        credentials = service_account.Credentials.from_service_account_file(
+            settings.GOOGLE_APPLICATION_CREDENTIALS,
+            scopes=["https://www.googleapis.com/auth/cloud-platform"]
+        )
+        
+        # Initialize storage client with credentials
+        self.storage_client = storage.Client(
+            credentials=credentials,
+            project=settings.GOOGLE_CLOUD_PROJECT
+        )
         self.bucket = self.storage_client.bucket(bucket_name)
     
     def compute_file_hash(self, file: BinaryIO) -> str:
