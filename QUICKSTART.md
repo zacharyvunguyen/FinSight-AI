@@ -48,7 +48,24 @@
    python scripts/test_imports.py
    python scripts/setup_gcp.py
    python scripts/setup_pinecone.py
+   python scripts/verify_uploads.py  # Check uploaded files
    ```
+
+## Testing File Upload
+1. Start the FastAPI server:
+   ```bash
+   uvicorn backend.app.main:app --reload
+   ```
+
+2. Visit Swagger UI:
+   ```
+   http://localhost:8000/docs
+   ```
+
+3. Test PDF upload:
+   - Use the POST `/api/v1/pdf/upload/` endpoint
+   - Upload a PDF file
+   - Verify upload with `scripts/verify_uploads.py`
 
 ## Troubleshooting
 - Ensure all environment variables are set

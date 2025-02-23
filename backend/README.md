@@ -1,13 +1,21 @@
 # FinSight AI Backend
 
+## Features
+- PDF Upload API with deduplication
+- Google Cloud Storage integration
+- Secure file access with signed URLs
+
 ## Structure
 ```
 backend/
 ├── app/
 │   ├── api/        # API endpoints
+│   │   └── endpoints/
+│   │       └── pdf.py    # PDF upload endpoint
 │   ├── core/       # Core configurations
 │   ├── models/     # Data models
 │   ├── services/   # Business logic
+│   │   └── storage.py    # GCS storage service
 │   └── utils/      # Utility functions
 └── tests/          # Backend tests
 ```
@@ -54,4 +62,22 @@ The backend uses pydantic-settings for configuration management. All settings ar
 
 ## API Documentation
 - Swagger UI: http://localhost:8000/docs
-- ReDoc: http://localhost:8000/redoc 
+- ReDoc: http://localhost:8000/redoc
+
+## API Endpoints
+
+### PDF Upload
+- **Endpoint**: `/api/v1/pdf/upload/`
+- **Method**: POST
+- **Description**: Upload PDF files to Google Cloud Storage
+- **Features**:
+  - File type validation
+  - SHA-256 hash generation
+  - Organized storage structure (by date)
+  - Signed URL generation for secure access
+
+## Storage Structure
+Files are stored in GCS with the following path structure:
+```
+uploads/YYYY/MM/DD/[file-hash]/[filename]
+``` 
