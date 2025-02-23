@@ -5,6 +5,8 @@ from ...models.pdf import PDFResponse
 from datetime import datetime
 from ...services.firestore import FirestoreService
 from ...services.extraction import ExtractionService
+from ...services.bigquery import BigQueryService
+from ...services.pinecone import PineconeService
 import tempfile
 import os
 from fastapi.responses import JSONResponse
@@ -13,6 +15,8 @@ router = APIRouter()
 storage_service = StorageService(settings.GCP_STORAGE_BUCKET)
 firestore_service = FirestoreService()
 extraction_service = ExtractionService()
+bigquery_service = BigQueryService()
+pinecone_service = PineconeService()
 
 @router.post("/upload/", response_model=PDFResponse)
 async def upload_pdf(file: UploadFile = File(...)):
@@ -70,6 +74,25 @@ async def upload_pdf(file: UploadFile = File(...)):
             'extraction_metadata': extraction_result['metadata']
         }
         await firestore_service.store_file_metadata(file_hash, metadata)
+        
+        # Store in BigQuery
+        bigquery_service.store_pdf_data(
+            file_hash=file_hash,
+            file_name=file.filename,
+            content=extraction_result['content'],
+            extraction_status=extraction_result['metadata']['status'],
+            job_id=extraction_result['metadata']['job_id']
+        )
+        
+        # Store in Pinecone
+        pinecone_service.store_embeddings(
+            content=extraction_result['content'],
+            metadata={
+                'file_hash': file_hash,
+                'file_name': file.filename,
+                'storage_path': storage_path
+            }
+        )
         
         # Cleanup temp file
         os.unlink(tmp_path)

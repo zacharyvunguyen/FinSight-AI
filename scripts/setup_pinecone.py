@@ -12,7 +12,7 @@ def validate_index_name(name):
     return bool(re.match(pattern, name))
 
 def setup_pinecone():
-    """Set up Pinecone index for vector embeddings."""
+    """Set up Pinecone index with OpenAI dimensions."""
     load_dotenv()
     
     print("\n🔄 Setting up Pinecone...")
@@ -38,37 +38,37 @@ def setup_pinecone():
         print("\n".join(missing_vars))
         return False
     
-    # Validate index name
+    pc = Pinecone(api_key=os.getenv('PINECONE_API_KEY'))
     index_name = os.getenv('PINECONE_INDEX_NAME')
+    
+    # Validate index name
     if not validate_index_name(index_name):
         print(f"\n❌ Invalid index name: {index_name}")
         print("Index name must contain only lowercase letters, numbers, and hyphens")
         return False
     
     try:
-        # Initialize Pinecone
-        pc = Pinecone(api_key=os.getenv('PINECONE_API_KEY'))
-        print("✅ Connected to Pinecone")
+        # Delete existing index if it exists
+        if index_name in pc.list_indexes().names():
+            print(f"\n🗑️ Deleting existing index: {index_name}")
+            pc.delete_index(index_name)
         
-        # Create index if it doesn't exist
-        if index_name not in [index.name for index in pc.list_indexes()]:
-            pc.create_index(
-                name=index_name,
-                dimension=1536,  # OpenAI text-embedding-ada-002 dimensions
-                metric='cosine',
-                spec=ServerlessSpec(
-                    cloud=os.getenv('PINECONE_CLOUD'),
-                    region=os.getenv('PINECONE_REGION')
-                )
+        # Create new index with OpenAI dimensions
+        print(f"\n📦 Creating new index: {index_name}")
+        pc.create_index(
+            name=index_name,
+            dimension=1536,  # OpenAI text-embedding-ada-002 dimensions
+            metric='cosine',
+            spec=ServerlessSpec(
+                cloud=os.getenv('PINECONE_CLOUD'),
+                region=os.getenv('PINECONE_REGION')
             )
-            print(f"✅ Created new index: {index_name}")
-        else:
-            print(f"ℹ️ Index {index_name} already exists")
-        
+        )
+        print("✅ Index created successfully with 1536 dimensions")
         return True
         
     except Exception as e:
-        print(f"❌ Error setting up Pinecone: {str(e)}")
+        print(f"\n❌ Error setting up Pinecone: {str(e)}")
         return False
 
 if __name__ == "__main__":
