@@ -100,6 +100,32 @@ uploads/YYYY/MM/DD/[file-hash]/[filename]
     - content_type
     - created_at
 
+### Google Cloud Storage (GCS)
+  - Purpose: Store actual PDF files
+  - Benefits:
+    - Optimized for large file storage
+    - Secure access via signed URLs
+    - Cost-effective for document storage
+    - Efficient file streaming and downloads
+
+### Firestore
+  - Purpose: Store metadata and track file hashes
+  - Benefits:
+    - Quick lookups for duplicate detection
+    - Structured, queryable metadata
+    - Real-time updates and indexing
+    - Efficient metadata searching
+
+### Data Organization
+  - Collection: `pdf_files`
+  - Document ID: File hash
+  - Metadata stored:
+    - file_name
+    - file_size
+    - storage_path
+    - content_type
+    - created_at
+
 ## Verification Scripts
 - `verify_pdf_service.py`: Test full upload pipeline
 - `list_stored_hashes.py`: View stored file metadata

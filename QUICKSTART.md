@@ -25,12 +25,27 @@
 
 3. **Google Cloud Setup**
    - Create GCP project
-   - Enable APIs (Storage, BigQuery)
+   - Enable Required APIs:
+     - Cloud Storage API
+     - Cloud Firestore API
+     - BigQuery API
    - Create service account with required permissions
+     - Storage Admin
+     - Cloud Datastore User
+     - Firebase Admin
    - Download key to `config/keys/`
    - Update GOOGLE_APPLICATION_CREDENTIALS in `.env`
 
-4. **Pinecone Setup**
+4. **Storage Setup**
+   - **Cloud Storage**:
+     - Create a new bucket named `finsight-reports-bucket`
+     - Set appropriate region (e.g., us-east1)
+   - **Firestore**:
+     - Create database in Native mode
+     - Choose same region as Storage
+     - Use default production rules
+
+5. **Pinecone Setup**
    - Create Pinecone account at pinecone.io
    - Create API key from dashboard
    - Note your cloud and region (default: aws, us-east-1)
@@ -42,13 +57,14 @@
      PINECONE_INDEX_NAME=financial-reports
      ```
 
-5. **Verify Setup**
+6. **Verify Setup**
    ```bash
    python scripts/verify_env.py
    python scripts/test_imports.py
    python scripts/setup_gcp.py
    python scripts/setup_pinecone.py
-   python scripts/verify_uploads.py  # Check uploaded files
+   python scripts/verify_uploads.py
+   python scripts/list_stored_hashes.py
    ```
 
 ## Testing File Upload
@@ -65,9 +81,18 @@
 3. Test PDF upload:
    - Use the POST `/api/v1/pdf/upload/` endpoint
    - Upload a PDF file
-   - Verify upload with `scripts/verify_uploads.py`
+   - Verify upload:
+     - Check GCS storage: `scripts/verify_uploads.py`
+     - Check Firestore metadata: `scripts/list_stored_hashes.py`
 
 ## Troubleshooting
 - Ensure all environment variables are set
 - Verify service account key location
-- Check Google Cloud API enablement 
+- Check Google Cloud API enablement:
+  - Cloud Storage API
+  - Cloud Firestore API
+  - BigQuery API
+- Verify service account permissions:
+  - Storage Admin for GCS
+  - Cloud Datastore User for Firestore
+  - Firebase Admin for full access 
