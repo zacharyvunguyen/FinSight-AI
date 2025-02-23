@@ -76,4 +76,41 @@ This guide will help you set up all the necessary keys and environment variables
 ## Troubleshooting
 
 - If you encounter issues with any API, ensure your keys are correct and have the necessary permissions.
-- Check the respective service's documentation for more detailed setup instructions. 
+- Check the respective service's documentation for more detailed setup instructions.
+
+## Google Cloud Platform Setup
+
+1. **Create a GCP Project**:
+   - Go to [Google Cloud Console](https://console.cloud.google.com)
+   - Create a new project or select existing one
+   - Note the Project ID
+
+2. **Enable Required APIs**:
+   - Cloud Storage API
+   - BigQuery API
+
+3. **Create Service Account**:
+   - Go to IAM & Admin > Service Accounts
+   - Create new service account
+   - Grant required roles:
+     - `Storage Admin`
+     - `BigQuery Admin`
+   - Create and download JSON key file
+
+4. **Configure Environment Variables**:
+   ```plaintext
+   GOOGLE_CLOUD_PROJECT=your-project-id
+   GCP_STORAGE_BUCKET=finsight-reports-bucket
+   BIGQUERY_DATASET=financial_analysis
+   GOOGLE_APPLICATION_CREDENTIALS=path/to/your/service-account-key.json
+   ```
+
+5. **Run Setup Script**:
+   ```bash
+   python scripts/setup_gcp.py
+   ```
+
+## Security Notes
+- Store service account key securely
+- Never commit credentials to version control
+- Use minimal required permissions for service accounts 
