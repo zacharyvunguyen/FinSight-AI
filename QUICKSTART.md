@@ -30,11 +30,24 @@
    - Download key to `config/keys/`
    - Update GOOGLE_APPLICATION_CREDENTIALS in `.env`
 
-4. **Verify Setup**
+4. **Pinecone Setup**
+   - Create Pinecone account at pinecone.io
+   - Create API key from dashboard
+   - Note your cloud and region (default: aws, us-east-1)
+   - Update PINECONE_* variables in `.env`:
+     ```
+     PINECONE_API_KEY=your_api_key
+     PINECONE_CLOUD=aws
+     PINECONE_REGION=us-east-1
+     PINECONE_INDEX_NAME=financial-reports
+     ```
+
+5. **Verify Setup**
    ```bash
    python scripts/verify_env.py
    python scripts/test_imports.py
    python scripts/setup_gcp.py
+   python scripts/setup_pinecone.py
    ```
 
 ## Troubleshooting
