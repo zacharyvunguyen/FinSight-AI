@@ -17,6 +17,7 @@ pinecone>=0.2.0
 # Google Cloud
 google-cloud-bigquery>=3.13.0
 google-cloud-storage>=2.13.0
+google-cloud-firestore>=2.13.0
 
 # Utilities
 python-dotenv>=1.0.0
