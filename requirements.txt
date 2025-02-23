@@ -1,8 +1,12 @@
 # Core
 fastapi>=0.104.1
-uvicorn>=0.24.0
+uvicorn[standard]>=0.24.0
 python-multipart>=0.0.6
 python-dotenv>=1.0.0
+pydantic>=1.10.0
+pydantic-settings==2.1.0
+aiohttp>=3.9.0
+python-jose[cryptography]>=3.3.0
 
 # Google Cloud
 google-cloud-storage>=2.13.0
@@ -11,11 +15,17 @@ google-cloud-bigquery>=3.13.0
 
 # PDF Processing
 llamaparse>=0.1.0
+llama-index>=0.1.0
+pypdf>=3.17.0
 
 # Vector Storage
 pinecone-client>=3.0.0
 openai>=1.3.0
 tiktoken>=0.5.2
+sentence-transformers>=2.2.2
+
+# AI and ML
+langchain>=0.0.350
 
 # Testing
 pytest>=7.4.3
@@ -24,17 +34,9 @@ httpx>=0.25.2
 # Web Framework
 streamlit>=1.29.0
 
-# AI and ML
-langchain>=0.0.350
-sentence-transformers>=2.2.2
-
 # Utilities
-hashlib>=20081119
 pandas>=2.1.4
 numpy>=1.26.2
 black>=23.12.1
 isort>=5.12.0
-pydantic>=1.10.0
-llama-index>=0.1.0
-requests>=2.31.0
-pydantic-settings==2.1.0 
+requests>=2.31.0 
