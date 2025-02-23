@@ -17,18 +17,22 @@ class Settings(BaseSettings):
     GOOGLE_CLOUD_PROJECT: str
     GCP_STORAGE_BUCKET: str
     BIGQUERY_DATASET: str
+    GOOGLE_APPLICATION_CREDENTIALS: str
     
     # Pinecone
     PINECONE_API_KEY: str
     PINECONE_CLOUD: str
     PINECONE_REGION: str
     PINECONE_INDEX_NAME: str
+    PINECONE_ENVIRONMENT: str
     
     # OpenAI
     OPENAI_API_KEY: str
     
     class Config:
         env_file = ".env"
+        case_sensitive = False
+        extra = "allow"
 
 @lru_cache()
 def get_settings():
