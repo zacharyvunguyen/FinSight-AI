@@ -141,3 +141,17 @@ pytest tests/integration
 ## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+## PDF Processing Pipeline
+
+### PDF Upload & Extraction
+- Uses LlamaParse API for extracting structured data from PDFs
+- Handles file upload, processing status tracking, and content retrieval
+- Supports both synchronous and asynchronous processing
+- Includes retry logic and error handling
+
+Example flow:
+1. Upload PDF file
+2. Get processing job ID
+3. Track processing status
+4. Retrieve structured markdown content

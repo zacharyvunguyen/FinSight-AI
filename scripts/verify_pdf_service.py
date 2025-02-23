@@ -7,7 +7,7 @@ from datetime import datetime
 import hashlib
 
 def verify_pdf_services():
-    """Verify PDF upload, storage, and metadata services."""
+    """Verify PDF upload, storage, metadata and extraction services."""
     load_dotenv()
     
     print("\n🔍 Verifying PDF Services...")
@@ -30,17 +30,17 @@ def verify_pdf_services():
         print(f"❌ Test file not found: {test_file}")
         return
     
-    print("\n1. Testing PDF Upload API")
+    print("\n1. Testing PDF Upload & Extraction")
     print("-" * 50)
     try:
-        # Compute hash before upload for verification
+        # Upload PDF
         with open(test_file, 'rb') as f:
             sha256_hash = hashlib.sha256()
             for byte_block in iter(lambda: f.read(4096), b""):
                 sha256_hash.update(byte_block)
             computed_hash = sha256_hash.hexdigest()
             print(f"Computed Hash: {computed_hash}")
-            f.seek(0)  # Reset file pointer
+            f.seek(0)
             
             files = {'file': (os.path.basename(test_file), f, 'application/pdf')}
             response = requests.post(
@@ -54,6 +54,7 @@ def verify_pdf_services():
             print(f"   File Hash: {data['file_hash']}")
             print(f"   Storage Path: {data['storage_path']}")
             print(f"   Signed URL available: {'signed_url' in data}")
+            print(f"   Extraction Status: {data['extraction_status']}")
             
             # Store for further tests
             file_hash = data['file_hash']
@@ -83,14 +84,23 @@ def verify_pdf_services():
     except Exception as e:
         print(f"❌ GCS verification failed: {str(e)}")
     
-    print("\n3. Verifying Firestore Metadata")
+    print("\n3. Verifying Firestore Metadata & Extraction")
     print("-" * 50)
     try:
         doc_ref = firestore_client.collection('pdf_files').document(file_hash)
         doc = doc_ref.get()
         if doc.exists:
             print("✅ Metadata found in Firestore")
-            print(f"   Data: {doc.to_dict()}")
+            data = doc.to_dict()
+            print(f"   Filename: {data.get('file_name')}")
+            print(f"   Size: {data.get('file_size')} bytes")
+            print(f"   Extraction Status: {data.get('extraction_metadata', {}).get('status')}")
+            if data.get('extracted_content'):
+                print("   Extracted Content: Available")
+                print("   First 200 chars of content:")
+                print(f"   {data.get('extracted_content')[:200]}...")
+            else:
+                print("❌ No extracted content found")
         else:
             print("❌ Metadata not found in Firestore")
             

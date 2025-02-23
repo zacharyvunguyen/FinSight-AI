@@ -95,4 +95,26 @@
 - Verify service account permissions:
   - Storage Admin for GCS
   - Cloud Datastore User for Firestore
-  - Firebase Admin for full access 
+  - Firebase Admin for full access
+
+## PDF Processing Setup
+
+1. Get LlamaParse API key from [LlamaIndex Cloud](https://cloud.llamaindex.ai)
+
+2. Add to `.env`:
+```bash
+LLAMA_CLOUD_API_KEY=your_api_key_here
+```
+
+3. Test extraction:
+```bash
+# Clean up any existing files
+python scripts/cleanup_storage.py
+
+# Test PDF processing
+python scripts/verify_pdf_service.py
+```
+
+4. Monitor processing status:
+- Check job status at https://cloud.llamaindex.ai/
+- View logs for detailed processing information 

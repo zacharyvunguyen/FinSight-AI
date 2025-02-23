@@ -29,6 +29,9 @@ class Settings(BaseSettings):
     # OpenAI
     OPENAI_API_KEY: str
     
+    # Llama Cloud
+    LLAMA_CLOUD_API_KEY: str
+    
     class Config:
         env_file = ".env"
         case_sensitive = False

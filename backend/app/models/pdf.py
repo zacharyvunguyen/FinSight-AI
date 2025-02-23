@@ -8,7 +8,8 @@ class PDFResponse(BaseModel):
     upload_timestamp: datetime
     file_size: int
     storage_path: str
-    signed_url: Optional[str] = None
+    signed_url: str
+    extraction_status: str
 
 class PDFStatus(BaseModel):
     file_hash: str

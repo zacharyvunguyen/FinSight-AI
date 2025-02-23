@@ -26,6 +26,7 @@ ENV/
 
 # Environment Variables
 .env
+.env.local
 
 # IDE
 .idea/
@@ -36,8 +37,11 @@ ENV/
 # Data
 data/raw/*
 data/processed/*
+data/test/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
+!data/test/.gitkeep
+!data/test/pdfs/  # Keep test PDFs
 
 # Logs
 *.log
@@ -51,4 +55,6 @@ htmlcov/
 # OS
 .DS_Store
 Thumbs.db 
-config/keys/finsight-ai-nguyen-89af45b3c2c0.json
+
+# Add to .gitignore
+config/keys/*.json
