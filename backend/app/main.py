@@ -1,9 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .api.endpoints import pdf
+from .api.endpoints import pdf, analysis
+from .core.config import settings
 
 app = FastAPI(
-    title="FinSight AI API",
+    title=settings.PROJECT_NAME,
     description="Financial Document Analysis API",
     version="1.0.0"
 )
@@ -19,6 +20,7 @@ app.add_middleware(
 
 # Include routers
 app.include_router(pdf.router, prefix="/api/v1/pdf", tags=["PDF"])
+app.include_router(analysis.router, prefix="/api/v1/analysis", tags=["Analysis"])
 
 @app.get("/")
 async def root():
